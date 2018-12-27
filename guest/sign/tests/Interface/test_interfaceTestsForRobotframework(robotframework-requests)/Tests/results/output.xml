@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generated="20180508 15:30:45.507" generator="Robot 3.0.3 (Python 2.7.13 on win32)">
+<suite source="D:\PythonProjects\DjangoProject\guest\sign\tests\Interface\test_interfaceTestsForRobotframework(robotframework-requests)\Tests\testAddEventInterface.robot" id="s1" name="testAddEventInterface">
+<test id="s1-t1" name="Test for Add Event Interface">
+<kw name="Test Procedure">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/x-www-form-urlencoded</arg>
+</arguments>
+<assign>
+<var>${header}</var>
+</assign>
+<msg timestamp="20180508 15:30:46.922" level="INFO">${header} = {u'Content-Type': u'application/x-www-form-urlencoded'}</msg>
+<status status="PASS" endtime="20180508 15:30:46.922" starttime="20180508 15:30:46.920"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>event</arg>
+<arg>http://127.0.0.1:9000/api</arg>
+</arguments>
+<msg timestamp="20180508 15:30:46.923" level="INFO">Creating Session using : alias=event, url=http://127.0.0.1:9000/api, headers={},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20180508 15:30:46.924" starttime="20180508 15:30:46.922"></status>
+</kw>
+<kw name="Generate Full JSON Body For Add Event HTTP Request" library="HTTPRequests">
+<doc>Generate full JSON body For Add Event HTTP request</doc>
+<arguments>
+<arg>addevent</arg>
+<arg>EVENT</arg>
+</arguments>
+<assign>
+<var>${postdata}</var>
+</assign>
+<kw name="Should Not Be Empty" library="BuiltIn">
+<doc>Verifies that the given item is not empty.</doc>
+<arguments>
+<arg>${request_type}</arg>
+</arguments>
+<msg timestamp="20180508 15:30:46.928" level="INFO">Length is 8</msg>
+<status status="PASS" endtime="20180508 15:30:46.928" starttime="20180508 15:30:46.926"></status>
+</kw>
+<kw name="Get EVENT Json Template" library="TemplateTool">
+<arguments>
+<arg>${request_type}</arg>
+<arg>${event_name}</arg>
+</arguments>
+<assign>
+<var>${output}</var>
+</assign>
+<msg timestamp="20180508 15:30:46.930" level="INFO">{
+  "eid":"3",
+  "event_name":"zhongxing tianji mobile phone evnet",
+  "people_limit":"2000",
+  "status":"0",
+  "address":"paris",
+  "start_time":"2018-05-19 14:00:00"
+
+}</msg>
+<msg timestamp="20180508 15:30:46.931" level="INFO">${output} = OrderedDict([('status', '0'), ('event_name', 'zhongxing tianji mobile phone evnet'), ('start_time', '2018-05-19 14:00:00'), ('people_limit', '2000'), ('eid', '3'), ('address', 'paris')])</msg>
+<status status="PASS" endtime="20180508 15:30:46.931" starttime="20180508 15:30:46.929"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${output}</arg>
+</arguments>
+<msg timestamp="20180508 15:30:46.932" level="INFO">OrderedDict([('status', '0'), ('event_name', 'zhongxing tianji mobile phone evnet'), ('start_time', '2018-05-19 14:00:00'), ('people_limit', '2000'), ('eid', '3'), ('address', 'paris')])</msg>
+<status status="PASS" endtime="20180508 15:30:46.932" starttime="20180508 15:30:46.931"></status>
+</kw>
+<msg timestamp="20180508 15:30:46.933" level="INFO">${postdata} = OrderedDict([('status', '0'), ('event_name', 'zhongxing tianji mobile phone evnet'), ('start_time', '2018-05-19 14:00:00'), ('people_limit', '2000'), ('eid', '3'), ('address', 'paris')])</msg>
+<status status="PASS" endtime="20180508 15:30:46.933" starttime="20180508 15:30:46.924"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${postdata}</arg>
+</arguments>
+<msg timestamp="20180508 15:30:46.934" level="INFO">OrderedDict([('status', '0'), ('event_name', 'zhongxing tianji mobile phone evnet'), ('start_time', '2018-05-19 14:00:00'), ('people_limit', '2000'), ('eid', '3'), ('address', 'paris')])</msg>
+<status status="PASS" endtime="20180508 15:30:46.934" starttime="20180508 15:30:46.933"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the</doc>
+<arguments>
+<arg>event</arg>
+<arg>/add_event/</arg>
+<arg>data=${postdata}</arg>
+<arg>headers=${header}</arg>
+</arguments>
+<assign>
+<var>${r}</var>
+</assign>
+<msg timestamp="20180508 15:30:47.032" level="INFO">Post Request using : alias=event, uri=/add_event/, data=status=0&amp;event_name=zhongxing+tianji+mobile+phone+evnet&amp;start_time=2018-05-19+14%3A00%3A00&amp;people_limit=2000&amp;eid=3&amp;address=paris, headers={u'Content-Type': u'application/x-www-form-urlencoded'}, files=None, allow_redirects=True </msg>
+<msg timestamp="20180508 15:30:47.032" level="INFO">${r} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20180508 15:30:47.032" starttime="20180508 15:30:46.935"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${r.status_code}</arg>
+<arg>200</arg>
+</arguments>
+<msg timestamp="20180508 15:30:47.033" level="INFO">Argument types are:
+&lt;type 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" endtime="20180508 15:30:47.033" starttime="20180508 15:30:47.032"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${r.json()}</arg>
+</arguments>
+<msg timestamp="20180508 15:30:47.034" level="INFO">{u'status': 200, u'message': u'add event success'}</msg>
+<status status="PASS" endtime="20180508 15:30:47.035" starttime="20180508 15:30:47.034"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${r.json()}</arg>
+</arguments>
+<assign>
+<var>${dict}</var>
+</assign>
+<msg timestamp="20180508 15:30:47.036" level="INFO">${dict} = {u'status': 200, u'message': u'add event success'}</msg>
+<status status="PASS" endtime="20180508 15:30:47.036" starttime="20180508 15:30:47.035"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${dict}</arg>
+</arguments>
+<msg timestamp="20180508 15:30:47.037" level="INFO">{u'status': 200, u'message': u'add event success'}</msg>
+<status status="PASS" endtime="20180508 15:30:47.037" starttime="20180508 15:30:47.036"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${dict}</arg>
+<arg>message</arg>
+</arguments>
+<assign>
+<var>${msg}</var>
+</assign>
+<msg timestamp="20180508 15:30:47.038" level="INFO">${msg} = add event success</msg>
+<status status="PASS" endtime="20180508 15:30:47.038" starttime="20180508 15:30:47.037"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${msg}</arg>
+<arg>add event success</arg>
+</arguments>
+<status status="PASS" endtime="20180508 15:30:47.039" starttime="20180508 15:30:47.038"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${dict}</arg>
+<arg>status</arg>
+</arguments>
+<assign>
+<var>${sta}</var>
+</assign>
+<msg timestamp="20180508 15:30:47.039" level="INFO">${sta} = 200</msg>
+<status status="PASS" endtime="20180508 15:30:47.040" starttime="20180508 15:30:47.039"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>int(200)</arg>
+</arguments>
+<assign>
+<var>${status}</var>
+</assign>
+<msg timestamp="20180508 15:30:47.040" level="INFO">${status} = 200</msg>
+<status status="PASS" endtime="20180508 15:30:47.040" starttime="20180508 15:30:47.040"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${sta}</arg>
+<arg>${status}</arg>
+</arguments>
+<status status="PASS" endtime="20180508 15:30:47.042" starttime="20180508 15:30:47.041"></status>
+</kw>
+<status status="PASS" endtime="20180508 15:30:47.042" starttime="20180508 15:30:46.919"></status>
+</kw>
+<status status="PASS" endtime="20180508 15:30:47.044" critical="yes" starttime="20180508 15:30:46.916"></status>
+</test>
+<status status="PASS" endtime="20180508 15:30:47.048" starttime="20180508 15:30:45.523"></status>
+</suite>
+<statistics>
+<total>
+<stat fail="0" pass="1">Critical Tests</stat>
+<stat fail="0" pass="1">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat fail="0" id="s1" name="testAddEventInterface" pass="1">testAddEventInterface</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
